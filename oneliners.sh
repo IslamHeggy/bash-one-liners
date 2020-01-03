@@ -9,3 +9,7 @@ source=".xlsx.txt"; destination=".xlsx";  IFS=$'\n' ; file=$(find . -type f -nam
 
 
 del='_' ;IFS=$'\n' ; file=$(find . -type f) && for i in $file ; do mv "$i" $(dirname "$i")/`echo $(basename "$i")  | cut -d"$del" -f2-`; done
+
+# This one liner copies all the files in a specific android filesystem path using adb protocol with adb-sync to a your specified local destination 
+
+for file in $(adb shell ls /storage/9F4F-28D0/); do ./adb-sync --reverse "/storage/9F4F-28D0/$file" "$destination"; done
